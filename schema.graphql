@@ -1,0 +1,96 @@
+scalar Upload
+
+type Mutation {
+    signup(data:[String]!):Data
+    empresa(data:[String]!):Data
+
+    admin(data:[String]!):Data
+    insertEmpleados(data:[String]!):Data
+    insertCentroTrabajo(data:[String]!):Data
+    insertProducto(data:[String]!):Data
+    clientes(data:[String]!):Data
+    procesaCompra(data:[String]!):Tabla
+
+}
+
+
+type Query{
+login(data:[String]!):Data
+getTabla(data:[String]!):[Tabla]
+
+}
+
+type Tabla {
+    nombre:String,
+    precio:String,
+    message:String
+}
+ type  getDataAdmin{
+    id_admin:String,
+    nombre:String,
+    correo:String,
+    nombre_cliente:String,
+    apellidoP_cliente:String,
+    correo_cliente:String,
+    nombreEmpleado:String,
+    apellidoPempleado:String,
+    razon_social:String,
+    direccion:String,
+    nombreproducto:String,
+    precio:String,
+ }
+
+type getAdmins {
+    id_admin:String
+    
+}
+
+
+
+type DataCentroTrabajo{
+    id:String,
+    razon_social:String,
+    direccion:String,
+    telefonoEmpresa:String,
+    correoEmpresas:String
+}
+
+type DataProducto{
+    id:String,
+    nombreproducto:String,
+    precio:String,
+    material:String
+
+}
+
+ type DataCliente{
+     id:String,
+     nombre_cliente:String,
+     apellidoP_cliente:String,
+     apellidoM_cliente:String,
+     cp_cliente:String,
+     telefono_cliente:String,
+     correo_cliente:String
+
+ }
+
+type DataEmpleado {
+  id:String,  
+  nombreEmpleado:String,
+  apellidoPempleado:String,
+  apellidoMempleado:String,
+  direccionE:String,
+  telefonoE:String,
+  cp:String
+}
+
+type Data{
+    id:String,
+    message:String,
+    nombre:String,
+    razon_social:String,
+    telefono:String,
+    correo:String,
+    contrasena:String,
+    token:String
+ }
