@@ -3,6 +3,7 @@ scalar Upload
 type Mutation {
     signup(data:[String]!):Data
     empresa(data:[String]!):Data
+    directorio(data:[String]!):Directorio
 
     admin(data:[String]!):Data
     insertEmpleados(data:[String]!):Data
@@ -13,11 +14,21 @@ type Mutation {
 
 }
 
-
 type Query{
 login(data:[String]!):Data
 getTabla(data:[String]!):[Tabla]
 
+}
+
+
+type Directorio{
+    id_cliente:String,
+    nombre_cliente:String,
+    empresa:String,
+    telefono1:String,
+    telefon2:String,
+    correo:String,
+    message:String
 }
 
 type Tabla {
@@ -25,6 +36,7 @@ type Tabla {
     precio:String,
     message:String
 }
+
  type  getDataAdmin{
     id_admin:String,
     nombre:String,

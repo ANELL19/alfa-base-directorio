@@ -105,12 +105,22 @@ const signup = (data) => {
         })
         }
 
+
+        
+    const directorio = (data)  => {
+        return new Promise((resolve,reject)=>{
+            client.query(`insert into directorio (nombre_cliente,empresa,telefono1,telefono2,correo) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}')`) 
+            resolve({message:"registro exitoso"})
+        })
+        }
+
 module.exports={
     GetTabla,
 
     login,
     signup,
     ProcesarCompra,
+    directorio
   
 /////
     
