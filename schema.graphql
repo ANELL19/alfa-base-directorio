@@ -97,12 +97,14 @@ type DataEmpleado {
 }
 
 type Data{
-    id:String,
-    message:String,
+    id_admin:String,    
     nombre:String,
-    razon_social:String,
+    apellidos:String,
+    razonSocial:String,
+    RFC:String,
     telefono:String,
     correo:String,
-    contrasena:String,
+    statusCorreo:String,
+    message:String,
     token:String
  }
