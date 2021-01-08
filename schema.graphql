@@ -9,7 +9,7 @@ type Mutation {
     insertEmpleados(data:[String]!):Data
     insertCentroTrabajo(data:[String]!):Data
     insertProducto(data:[String]!):Data
-    clientes(data:[String]!):Data
+    insertClientes(data:[String]!):insertClientes
     procesaCompra(data:[String]!):Tabla
 
 }
@@ -17,6 +17,34 @@ type Mutation {
 type Query{
 login(data:[String]!):Data
 getTabla(data:[String]!):[Tabla]
+loginclientes(data:[String]!):loginclientes
+
+}
+type insertClientes{
+    id_cliente:String,
+    nombre_cliente:String
+    apellidos_clientes:String
+    curp:String,
+    rfc:String,
+    nombreEmpresa:String,
+    telefono:String,
+    correo:String,  
+    num_factura:String,
+    fk_administrador:String,  
+    message:String
+
+}
+
+type loginclientes{
+    id_cliente:String,
+    nombre_cliente:String
+    apellidos_cliente:String
+    curp:String,
+    rfc:String,
+    nombreEmpresa:String,
+    telefono:String,
+    correo:String,    
+    message:String
 
 }
 
@@ -105,6 +133,7 @@ type Data{
     telefono:String,
     correo:String,
     statusCorreo:String,
+    fk_administrador:String,
     message:String,
     token:String
  }

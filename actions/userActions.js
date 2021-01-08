@@ -104,22 +104,79 @@ const signup = (data) => {
 
 
         
-    const directorio = (data)  => {
-        console.log('esto contiene directorio data:',data)
+    // const directorio = (data)  => {
+    //     console.log('esto contiene directorio data:',data)
+    //     return new Promise((resolve,reject)=>{            
+    //         client.query(`insert into directorio (nombre_cliente,empresa,telefono1,telefono2,correo) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}')`) 
+    //         resolve({message:"registro exitoso"})
+    //     })
+    //     }
+
+             
+    const insertClientes= (data)=> {
+       console.log('esto contiene clientes data:',data)
         return new Promise((resolve,reject)=>{            
-            client.query(`insert into directorio (nombre_cliente,empresa,telefono1,telefono2,correo) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}')`) 
+            client.query(`insert into clientes (nombre_cliente, apellidos_cliente,curp,rfc,nombreEmpresa,telefono,correo,contrasena,num_factura) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','${data[6]}','${data[7]}','${data[8]}')`) 
             resolve({message:"registro exitoso"})
         })
         }
 
+        
+const loginclientes  = async  data =>{
+    console.log('esto es la data',data)
+  return new Promise((resolve,reject) =>{ 
+
+   //console.log(' esta es la query',`select * from clientes where correo='${data[0]}' and contraseña = '${data[1]}'`,
+   
+
+   client.query(`select * from clientes where correo='${data[0]}'`,
+   function(err,results,field){
+    if(err){ reject(err)
+   //console.log("error", err)
+   }
+
+       var string = JSON.stringify(results)
+       var resultados=JSON.parse(string);
+
+       if(resultados[0]){
+        console.log("resultados",resultados[0])
+         bcrypt.compare(data[1],resultados[0].contrasena,function(error,result){
+               if(result){
+                    resolve({
+                    id_cliente:resultados[0].id_cliente,
+                    nombre_cliente:resultados[0].nombre_cliente,
+                    apellidos_cliente:resultados[0].apellidos_cliente,
+                    rfc:resultados[0].rfc,
+                    nombreEmpresa:resultados[0].nombreEmpresa,
+                    telefono:resultados[0].telefono,
+                    correo:resultados[0].correo,                    
+                    message:"login exitoso",
+                    token:jsonwebtoken(resultados[0].correo) //coreo data[0]]
+   
+            })
+               } else{ 
+                
+                   resolve.Alert({message:"usuario y contraseña incorrecto", token:"no hay token"})
+               }
+           })
+         //no existe el usuario "correo y contraseña"
+       
+       }else{
+           resolve({
+               message:"usuario no encontrado ",
+             
+            })
+       }   
+   })
+} )
+
+}
+
 module.exports={
     GetTabla,
-
+    insertClientes,
     login,
     signup,
     ProcesarCompra,
-    directorio
-  
-/////
-    
+    loginclientes
 }
