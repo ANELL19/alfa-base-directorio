@@ -83,12 +83,6 @@ const signup = (data) => {
      
  })   
 } 
-   const ProcesarCompra   = (data)  => {
-    return new Promise((resolve,reject)=>{
-        client.query(`insert into tabla (nombre,precio) values('${data[0]}','${data[1]}')`) 
-        resolve({message:"registro exitoso"})
-    })
-    }
 
     const GetTabla   = ( )  => {
         return new Promise((resolve,reject)=>{
@@ -102,15 +96,6 @@ const signup = (data) => {
         })
         }
 
-
-        
-    // const directorio = (data)  => {
-    //     console.log('esto contiene directorio data:',data)
-    //     return new Promise((resolve,reject)=>{            
-    //         client.query(`insert into directorio (nombre_cliente,empresa,telefono1,telefono2,correo) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}')`) 
-    //         resolve({message:"registro exitoso"})
-    //     })
-    //     }
 
              
     const insertClientes= (data)=> {
@@ -129,7 +114,7 @@ const loginclientes  = async  data =>{
    //console.log(' esta es la query',`select * from clientes where correo='${data[0]}' and contraseña = '${data[1]}'`,
    
 
-   client.query(`select * from clientes where correo='${data[0]}'`,
+   client.query(`select * from clientes where correo='${data[0]}' and contrasena='${data[1]}'`,
    function(err,results,field){
     if(err){ reject(err)
    //console.log("error", err)
@@ -176,7 +161,6 @@ module.exports={
     GetTabla,
     insertClientes,
     login,
-    signup,
-    ProcesarCompra,
+    signup,   
     loginclientes
 }
