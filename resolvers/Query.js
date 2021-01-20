@@ -9,14 +9,7 @@ const login  =  (_ , data) =>{
  return actions.login(variable)
 
 }
-const getTabla  =  (_ , data) =>{
-    var cadena= data.data[0]
-    var variable = cadena.split(",")
 
- console.log("la data en query es " , data)
- return actions.GetTabla(variable)
-
-}
 const loginclientes  =  (_ , data) =>{
     var cadena= data.data[0]
     var variable = cadena.split(",")
@@ -26,10 +19,42 @@ const loginclientes  =  (_ , data) =>{
 
 }
 
+const getTablaClientes =  (_ , data) =>{
+    
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+
+ console.log("la data en query es " , variable)
+ return actions.getTablaClientes(variable)
+
+}
+
+
+const loginAdminGeneral  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+ console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.loginAdminGeneral(variable)
+
+}
+const getTablaAdmin  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.getTablaAdmin (variable)
+
+}
+
 module.exports={
-    getTabla,
+    
     login,
     loginclientes,
+    getTablaClientes,
+    loginAdminGeneral,
+    getTablaAdmin 
+    
     
     
 }

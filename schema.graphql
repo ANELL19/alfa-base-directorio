@@ -3,35 +3,46 @@ scalar Upload
 type Mutation {
     signup(data:[String]!):Data
     empresa(data:[String]!):Data
-    directorio(data:[String]!):Directorio
-
     admin(data:[String]!):Data
-    insertEmpleados(data:[String]!):Data
-    insertCentroTrabajo(data:[String]!):Data
-    insertProducto(data:[String]!):Data
     insertClientes(data:[String]!):insertClientes
-    procesaCompra(data:[String]!):Tabla
+     signupAdminGeneral(data:[String]!): signupAdminGeneral
 
 }
 
 type Query{
 login(data:[String]!):Data
-getTabla(data:[String]!):[Tabla]
 loginclientes(data:[String]!):loginclientes
-
+getTablaClientes(data:[String]!):[getTablaClientes]
+loginAdminGeneral(data:[String]!):loginAdminGeneral
+getTablaAdmin(data:[String]!):[getTablaAdmin]
 }
-type insertClientes{
+
+type getTablaClientes{
     id_cliente:String,
-    nombre_cliente:String
-    apellidos_clientes:String
+    nombre_cliente:String,
+    apellidos_cliente:String,
     curp:String,
     rfc:String,
     nombreEmpresa:String,
     telefono:String,
     correo:String,  
-    num_factura:String,
-    fk_administrador:String,  
+    num_factura:String,  
+    fk_administrador:String,   
     message:String
+
+}
+
+type insertClientes{
+    id_cliente:String,
+    nombre_cliente:String,
+    apellidos_cliente:String,
+    curp:String,
+    rfc:String,
+    nombreEmpresa:String,
+    telefono:String,
+    correo:String,  
+    num_factura:String,    
+     message:String
 
 }
 
@@ -47,93 +58,59 @@ type loginclientes{
     message:String
 
 }
-
-
-type Directorio{
-    id_cliente:String,
-    nombre_cliente:String,
-    empresa:String,
-    telefono1:String,
-    telefon2:String,
-    correo:String,
-    message:String
-}
-
-type Tabla {
+type loginAdminGeneral{
+    id_adminG:String,    
     nombre:String,
-    precio:String,
-    message:String
-}
+    apellido:String,
+    razonSocial:String,
+    RFC:String,
+    telefono:String,
+    correo:String,      
+    message:String,
+    fk_paquete:String,
+    token:String
 
- type  getDataAdmin{
-    id_admin:String,
+}
+type  signupAdminGeneral{
+
+    id_adminG:String,    
     nombre:String,
+    apellido:String,
+    razonSocial:String,
+    RFC:String,
+    telefono:String,
+    correo:String,      
+    message:String,
+    fk_paquete:String,
+    token:String
+}
+type getTablaAdmin{
+     id_admin:String,    
+    nombre:String,
+    apellidos:String,
+    razonSocial:String,
+    rfc:String,
+    RFC:String,
+    telefono:String,
     correo:String,
-    nombre_cliente:String,
-    apellidoP_cliente:String,
-    correo_cliente:String,
-    nombreEmpleado:String,
-    apellidoPempleado:String,
-    razon_social:String,
-    direccion:String,
-    nombreproducto:String,
-    precio:String,
- }
-
-type getAdmins {
-    id_admin:String
-    
-}
-
-
-
-type DataCentroTrabajo{
-    id:String,
-    razon_social:String,
-    direccion:String,
-    telefonoEmpresa:String,
-    correoEmpresas:String
-}
-
-type DataProducto{
-    id:String,
-    nombreproducto:String,
-    precio:String,
-    material:String
+    statusCorreo:String,   
+    message:String,
+    token:String
 
 }
 
- type DataCliente{
-     id:String,
-     nombre_cliente:String,
-     apellidoP_cliente:String,
-     apellidoM_cliente:String,
-     cp_cliente:String,
-     telefono_cliente:String,
-     correo_cliente:String
 
- }
-
-type DataEmpleado {
-  id:String,  
-  nombreEmpleado:String,
-  apellidoPempleado:String,
-  apellidoMempleado:String,
-  direccionE:String,
-  telefonoE:String,
-  cp:String
-}
 
 type Data{
     id_admin:String,    
     nombre:String,
     apellidos:String,
     razonSocial:String,
+    rfc:String,
     RFC:String,
     telefono:String,
     correo:String,
-    statusCorreo:String,
-    fk_administrador:String,
+    statusCorreo:String,   
     message:String,
     token:String
  }
