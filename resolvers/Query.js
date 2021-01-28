@@ -46,14 +46,55 @@ const getTablaAdmin  =  (_ , data) =>{
  return actions.getTablaAdmin (variable)
 
 }
+const getValidation  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+    
+ return actions.getValidation (variable)
+
+}
+
+const getPaquetes  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.getPaquetes (variable)
+
+}
+
+const pruebaUser  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.pruebaUser (variable)
+
+}
+
+
+const getRFC  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.getRFC (variable)
+
+}
+
+
 
 module.exports={
-    
+    getRFC,
     login,
     loginclientes,
     getTablaClientes,
     loginAdminGeneral,
-    getTablaAdmin 
+    getTablaAdmin,
+    getValidation,
+    getPaquetes,
+    pruebaUser
     
     
     

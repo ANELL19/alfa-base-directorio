@@ -68,15 +68,26 @@ const signup = (data) => {
          if (error){    
               reject(error,{message:'error',token:error})
          } else{
-             bcrypt.hash(data[7],salt, function(error,hash){
-                 console.log("data[7]" , data[7])
+             bcrypt.hash(data[6],salt, function(error,hash){
+                 console.log("data[6]" , data[6])
                  if(error){
                     throw error
                  } else{
                      let idAdmin = parseInt(data[7]);
-                     console.log(`insert into administrador(nombre,apellidos,razonSocial,RFC,telefono,correo,statusCorreo,contraseña,fk_adminGral) values ('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','TRUE' , '${hash}',${idAdmin})`)
+                 //    console.log(`insert into administrador(nombre,apellidos,razonSocial,RFC,telefono,correo,statusCorreo,contraseña,fk_adminGral) values ('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','TRUE' , '${hash}',${idAdmin})`)
                     client.query(`insert into administrador(nombre,apellidos,razonSocial,RFC,telefono,correo,statusCorreo,contraseña,fk_adminGral) values ('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','TRUE','${hash}',${idAdmin})`);
-                    resolve({message:"el registro en signup fue exitoso"})
+                  
+                       resolve({
+                        nombre:resultados[0].nombre,                        
+                        apellidos:resultados[0].apellidos,
+                        razonSocial:resultados[0].razonSocial,
+                        RFC:resultados[0].rfc,
+                        telefono:resultados[0].telefono,
+                        correo:resultados[0].correo,                       
+                        message:"el registro en signup fue exitoso",
+
+                     })
+                       
                  }
              })
          }
@@ -85,7 +96,6 @@ const signup = (data) => {
      
  })   
 } 
-
 
     const getTablaClientes   = ( data)  => {
         return new Promise((resolve,reject)=>{
@@ -176,6 +186,7 @@ const loginAdminGeneral  = async  data =>{
            bcrypt.compare(data[1],resultados[0].contraseña,function(error,result){
                if(result){
                     resolve({
+                    fk_paquetes:resultados[0].fk_paquetes,    
                     id_adminG:resultados[0].id_adminG,
                     nombre:resultados[0].nombre,
                     apellido:resultados[0].apellido,              
@@ -237,22 +248,128 @@ const  signupAdminGeneral = (data) => {
         return new Promise((resolve,reject)=>{
             client.query(`select * from administrador where fk_adminGral='${data[0]}'` , function (err,results,fields ) {            
                 var string = JSON.stringify(results)
-                var resultados=JSON.parse(string);
-    
+                var resultados=JSON.parse(string);    
                 resolve(resultados)
                 console.log("resultados",resultados)
+                // resolve({
+                //     id_admin:resultados[0].id_admin,  
+                //     nombre:resultados[0].nombre,
+                //     apellidos:resultados[0].apellidos,
+                //     razonSocial:resultados[0].razonSocial,
+                //     rfc:resultados[0].rfc,                  
+                //     telefono:resultados[0].telefono,
+                //     correo:resultados[0].correo,                  
+                   
+                   
+
+                // })
             }) 
         })
         }
 
+        const getValidation   = ( data)  => {
+            console.log("data",data[0],"query  :" , `select  count(id_admin) as id from administrador  where fk_adminGral = '${data[0]}'`)
+            return new Promise((resolve,reject)=>{
+                client.query(`select  count(id_admin) as id from administrador where fk_adminGral = '${data[0]}'`,function(err,results,fields){
+                    var string = JSON.stringify(results)
+                    var resultados = JSON.parse(string)
+                    
+                    resolve(resultados[0])
+                    console.log("resultados[0]",resultados[0])
+                })
+            })
+            }
+
+            const getPaquetes   = ( data)  => {
+                console.log("data",data)
+                return new Promise((resolve,reject)=>{
+                    client.query(`select * from paquetes where id_paquetes ='${data[0]}'` , function (err,results,fields ) {            
+                        var string = JSON.stringify(results)
+                        var resultados=JSON.parse(string);
+            
+                        resolve({
+                            empresas:resultados[0].empresas
+                        })
+                    }) 
+                })
+                }
+
+                        
+const pruebaUser  = async  data =>{
+    console.log('esto es la data',data)
+  return new Promise((resolve,reject) =>{ 
+
+   //console.log(' esta es la query',`select * from clientes where correo='${data[0]}' and contraseña = '${data[1]}'`,
+   
+
+   client.query(`select * from administrador where rfc='${data[3]}' `,
+   function(err,results,field){
+    var string = JSON.stringify(results)
+    var resultados=JSON.parse(string);
+    if (resultados[0]){
+        resolve({
+            message:"ya se encuentra registrado"
+        })
+    }else{
+        bcrypt.genSalt(SALT_WORK_FACTOR,function(error,salt){
+            if (error){    
+                 reject(error,{message:'error',token:error})
+            } else{
+                bcrypt.hash(data[6],salt, function(error,hash){
+                    console.log("data[6]" , data[6])
+                    if(error){
+                       throw error
+                    } else{
+                        let idAdmin = parseInt(data[7]);
+                    //    console.log(`insert into administrador(nombre,apellidos,razonSocial,RFC,telefono,correo,statusCorreo,contraseña,fk_adminGral) values ('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','TRUE' , '${hash}',${idAdmin})`)
+                       client.query(`insert into administrador(nombre,apellidos,razonSocial,RFC,telefono,correo,statusCorreo,contraseña,fk_adminGral) values ('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','TRUE','${hash}',${idAdmin})`);
+                       resolve
+                       ({
+
+                           message:"el registro en signup fue exitoso",
+
+                       })
+                    }
+                })
+            }
+   
+        })
+
+    }
+})
+})
+}
+
+
+
+  const getRFC   = ( data)  => {
+                console.log("data",data)
+                return new Promise((resolve,reject)=>{
+                    client.query(`select * from administrador where rfc ='${data[0]}'` , function (err,results,fields ) {            
+                        var string = JSON.stringify(results)
+                        var resultados=JSON.parse(string);
+            
+                        resolve({
+                            id_admin:resultados[0].id_admin,
+                            rfc:resultados[0].rfc
+                        })
+                    }) 
+                })
+                }
+
 module.exports={
 
     // insertClientes,
+    getRFC,
     login,
     signup,   
     loginclientes,
     getTablaClientes,
     loginAdminGeneral,
     signupAdminGeneral,
-    getTablaAdmin
+    getTablaAdmin,
+    getValidation,
+    getPaquetes,
+    pruebaUser
+    
 }

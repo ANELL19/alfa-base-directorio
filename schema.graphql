@@ -15,6 +15,37 @@ loginclientes(data:[String]!):loginclientes
 getTablaClientes(data:[String]!):[getTablaClientes]
 loginAdminGeneral(data:[String]!):loginAdminGeneral
 getTablaAdmin(data:[String]!):[getTablaAdmin]
+getValidation(data:[String]!):getValidation
+getPaquetes(data:[String]!):paquetes
+ pruebaUser(data:[String]!):pruebaUser
+getRFC(data:[String]!):getRFC
+
+}
+
+type getRFC {
+    id_admin:String,       
+    rfc:String,       
+    message:String
+}
+
+type pruebaUser{
+    id_admin:String,    
+    nombre:String,
+    apellidos:String,
+    razonSocial:String,
+    rfc:String,
+    RFC:String,
+    telefono:String,
+    correo:String,
+    statusCorreo:String,   
+    message:String,
+    token:String
+
+}
+
+ type  getValidation{
+    id:String
+   
 }
 
 type getTablaClientes{
@@ -67,9 +98,13 @@ type loginAdminGeneral{
     telefono:String,
     correo:String,      
     message:String,
-    fk_paquete:String,
+    fk_paquetes:String,
     token:String
 
+}
+
+type paquetes{
+    empresas:String
 }
 type  signupAdminGeneral{
 
