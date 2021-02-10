@@ -1,12 +1,12 @@
 scalar Upload
 
 type Mutation {
-    signup(data:[String]!):Data
+    # signup(data:[String]!):Data
     empresa(data:[String]!):Data
     admin(data:[String]!):Data
     insertClientes(data:[String]!):insertClientes
-     signupAdminGeneral(data:[String]!): signupAdminGeneral
-
+    signupAdminGeneral(data:[String]!): signupAdminGeneral
+    signupAlfa(data:[String]!):signupAlfa
 }
 
 type Query{
@@ -17,9 +17,18 @@ loginAdminGeneral(data:[String]!):loginAdminGeneral
 getTablaAdmin(data:[String]!):[getTablaAdmin]
 getValidation(data:[String]!):getValidation
 getPaquetes(data:[String]!):paquetes
- pruebaUser(data:[String]!):pruebaUser
+signupAdmin(data:[String]!):signupAdmin
+loginAdminAlfa(data:[String]!):loginAdminAlfa
 getRFC(data:[String]!):getRFC
+getVentasAlfa(data:[String]!):[getVentasAlfa]
+getAdminGral(data:[String]!):[signupAdminGeneral]
 
+}
+type getVentasAlfa {
+    idVentas:String
+    fechaVenta:String
+    fk_adminG:String
+    fk_paquete:String
 }
 
 type getRFC {
@@ -27,8 +36,25 @@ type getRFC {
     rfc:String,       
     message:String
 }
+type loginAdminAlfa{
+    id:String,
+    nombre:String,
+    apellido:String,
+    correo:String,
+    token:String,
+    message:String
+}
 
-type pruebaUser{
+type signupAlfa{
+    id:String,
+    nombre:String,
+    apellido:String,
+    correo:String,
+    token:String,
+    message:String
+}
+
+type signupAdmin{
     id_admin:String,    
     nombre:String,
     apellidos:String,
@@ -72,7 +98,8 @@ type insertClientes{
     nombreEmpresa:String,
     telefono:String,
     correo:String,  
-    num_factura:String,    
+    num_factura:String,   
+    fk_administrador:String 
      message:String
 
 }
@@ -94,6 +121,7 @@ type loginAdminGeneral{
     nombre:String,
     apellido:String,
     razonSocial:String,
+    rfc:String,
     RFC:String,
     telefono:String,
     correo:String,      
@@ -118,6 +146,8 @@ type  signupAdminGeneral{
     message:String,
     fk_paquete:String,
     token:String
+    empresas:String
+    rfc:String
 }
 type getTablaAdmin{
      id_admin:String,    

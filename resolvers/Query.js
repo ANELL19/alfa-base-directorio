@@ -64,12 +64,22 @@ const getPaquetes  =  (_ , data) =>{
 
 }
 
-const pruebaUser  =  (_ , data) =>{
+const signupAdmin  =  (_ , data) =>{
     var cadena= data.data[0]
     var variable = cadena.split(",")
 //  console.log("la data en query es " , data)
  console.log("esto es variable", variable)
- return actions.pruebaUser (variable)
+ return actions.signupAdmin (variable)
+
+}
+
+
+const loginAdminAlfa  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+ console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.loginAdminAlfa(variable)
 
 }
 
@@ -83,9 +93,29 @@ const getRFC  =  (_ , data) =>{
 
 }
 
+const getVentasAlfa  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.getVentasAlfa (variable)
+
+}
+
+const getAdminGral  =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.getAdminGral (variable)
+
+}
+
 
 
 module.exports={
+    getAdminGral,
+    getVentasAlfa,
     getRFC,
     login,
     loginclientes,
@@ -94,7 +124,8 @@ module.exports={
     getTablaAdmin,
     getValidation,
     getPaquetes,
-    pruebaUser
+    signupAdmin,
+    loginAdminAlfa
     
     
     
