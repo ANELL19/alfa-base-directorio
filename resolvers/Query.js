@@ -111,9 +111,18 @@ const getAdminGral  =  (_ , data) =>{
 
 }
 
+const loginModalAdmin   =  (_ , data) =>{
+    var cadena= data.data[0]
+    var variable = cadena.split(",")
+//  console.log("la data en query es " , data)
+ console.log("esto es variable", variable)
+ return actions.loginModalAdmin  (variable)
+
+}
 
 
 module.exports={
+    loginModalAdmin,
     getAdminGral,
     getVentasAlfa,
     getRFC,

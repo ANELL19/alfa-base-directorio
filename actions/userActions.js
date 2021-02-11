@@ -465,8 +465,80 @@ const loginAdminAlfa  = async  data =>{
                     )
                 }) 
             })
-            }    
+            }  
+//////********
+            
+const  loginModalAdmin  = async  data =>{
+    console.log('esto es la data',data)
+  return new Promise((resolve,reject) =>{ 
+
+   //console.log(' esta es la query',`select * from clientes where correo='${data[0]}' and contraseña = '${data[1]}'`,
+   
+
+   client.query(`select * from administrador where correo='${data[0]}'`,
+   function(err,results,field){
+    if(err){ reject(err)
+   //console.log("error", err)
+   }
+
+       var string = JSON.stringify(results)
+
+       var resultados=JSON.parse(string);
+
+       if(resultados[0]){
+        console.log("resultados",resultados[0])
+
+
+           bcrypt.compare(data[1],resultados[0].contraseña,function(error,result){
+               console.log("data[1]",data[1])
+               if(result){
+                    resolve({
+                    id_admin:resultados[0].id_admin,
+                    nombre:resultados[0].nombre,
+                    apellidos:resultados[0].apellidos,
+                    razonSocial:resultados[0].razonSocial,
+                    RFC:resultados[0].rfc,
+                    telefono:resultados[0].telefono,
+                    correo:resultados[0].correo,
+                    statusCorreo:resultados[0].statusCorreo,
+                    message:"login exitoso",
+                    token:jsonwebtoken(resultados[0].correo) //coreo data[0]]
+   
+            })
+               } else{ 
+                   resolve({message:"usuario y contraseña incorrecto", token:"no hay token"})
+               }
+           })
+         //no existe el usuario "correo y contraseña"
+       
+       }else{
+           resolve({
+               message:"usuario no encontrado ",
+             
+            })
+       }   
+   })
+} )
+
+}
+
+
+// const getModalLogin   = ( data)  => {
+//     return new Promise((resolve,reject)=>{
+//         client.query(`select * from ventasAlfa where fk_adminAlfa ='${data[0]}'` , function (err,results,fields ) {            
+//             var string = JSON.stringify(results)
+//             var resultados=JSON.parse(string);
+
+//             resolve(
+//                 resultados
+//             )
+//         }) 
+//     })
+//     } 
+            
+            
 module.exports={
+    loginModalAdmin ,
     getAdminGral,
     getVentasAlfa,
     insertClientes,

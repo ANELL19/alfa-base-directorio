@@ -22,8 +22,26 @@ loginAdminAlfa(data:[String]!):loginAdminAlfa
 getRFC(data:[String]!):getRFC
 getVentasAlfa(data:[String]!):[getVentasAlfa]
 getAdminGral(data:[String]!):[signupAdminGeneral]
+loginModalAdmin (data:[String]!):loginModalAdmin 
 
 }
+
+type loginModalAdmin {
+    id_admin:String,    
+    nombre:String,
+    apellidos:String,
+    razonSocial:String,
+    rfc:String,
+    RFC:String,
+    telefono:String,
+    correo:String,
+    statusCorreo:String,   
+    message:String,
+    token:String
+ 
+}
+
+
 type getVentasAlfa {
     idVentas:String
     fechaVenta:String
