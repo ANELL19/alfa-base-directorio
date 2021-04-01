@@ -570,9 +570,42 @@ const loginModalAlfa  = async  data =>{
 } )
 
 }
+
+const insertCotizaciones = (data)=> { 
+    console.log("data",data)
+    return new Promise((resolve,reject)=>{  
+        var date= new Date()
+        var fecha = date.toLocaleString('es')
+        // var tasa=16
+        // var monto=data[11]
+
+        // var iva=((monto*tasa)/100)
+        // console.log("tasa",tasa)
+        // console.log("monto",monto)
+
+        // console.log("esto es iva", iva.toFixed(2))
+
+
+        //  let id_admin = parseInt(data[18]);
+        
+        // let id_adminAlfa = parseInt(data[18]);
+      // client.query(`insert into cotizaciones(razonSocial,nombre,apellidos,correo1,correo2,telefono1,telefono2,telefono3,telefono4,telefono5,Servicio,precio,iva,total,promocion,vendedor,fecha,fk_adminalfa) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','${data[6]}','${data[7]}','${data[8]}','${data[9]}','${data[10]}','${data[11]}','${data[12]}','${data[13]}','${data[14]}','${data[15]}','${data[16]}','${data[17]}')`) 
+       client.query(`insert into cotizaciones(razonSocial,nombre,apellidos,correo1,correo2,telefono1,telefono2,telefono3,telefono4,telefono5,Servicio,precio,iva,total,promocion,vendedor,fecha,fk_adminalfa) values('${data[0]}','${data[1]}','${data[2]}','${data[3]}','${data[4]}','${data[5]}','${data[6]}','${data[7]}','${data[8]}','${data[9]}','${data[10]}','${data[11]}','${data[12]}','${data[13]}','${data[14]}','${data[15]}','${fecha}','${data[16]}')`) 
+      
+
+        resolve({message:"registro exitoso"})
+    })
+    }
+
+
+
+
+
+
             
             
 module.exports={
+    insertCotizaciones,
     loginModalAlfa,
     loginModalAdmin ,
     getAdminGral,

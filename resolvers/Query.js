@@ -130,7 +130,11 @@ const loginModalAlfa   =  (_ , data) =>{
 }
 
 
+
+
+
 module.exports={
+   
     loginModalAlfa,
     loginModalAdmin,
     getAdminGral,

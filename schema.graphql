@@ -1,12 +1,13 @@
 scalar Upload
 
 type Mutation {
-    # signup(data:[String]!):Data
+    signup(data:[String]!):Data
     empresa(data:[String]!):Data
     admin(data:[String]!):Data
     insertClientes(data:[String]!):insertClientes
     signupAdminGeneral(data:[String]!): signupAdminGeneral
     signupAlfa(data:[String]!):signupAlfa
+    insertCotizaciones(data:[String]!):insertCotizaciones
 }
 
 type Query{
@@ -26,6 +27,30 @@ loginModalAdmin (data:[String]!):loginModalAdmin
 loginModalAlfa(data:[String]!):loginModalAlfa
 
 }
+
+type insertCotizaciones{
+   id_cotizacion:String, 
+   razonSocial:String ,
+   nombre:String, 
+   apellidos:String , 
+   correo1:String ,
+   correo2:String , 
+   telefono1:String ,
+   telefono2:String,
+   telefono3:String, 
+   telefono4:String , 
+   telefono5:String,
+   Servicio:String,
+   precio:String, 
+   iva:String,
+   total:String,
+   promocion:String, 
+   vendedor:String,
+   fecha:String,   
+   fk_adminalfa:String,
+   message:String
+}
+
 
 type loginModalAlfa{
     id:String,
